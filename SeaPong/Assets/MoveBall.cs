@@ -30,12 +30,12 @@ public class MoveBall : MonoBehaviour {
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Wall_Top") || collision.gameObject.CompareTag("Wall_Bottom") )
+        if (collision.gameObject.CompareTag("WallBounce"))
         {
             // Inverte a direção no eixo Y
             direction.y = -direction.y;
         }
-        if (collision.gameObject.CompareTag("RacketL") || collision.gameObject.CompareTag("RacketR"))
+        if (collision.gameObject.CompareTag("Racket"))
         {
             //calcula onde bateu
             // Inverte a direção no eixo X
@@ -43,13 +43,14 @@ public class MoveBall : MonoBehaviour {
         }
     }
     void OnTriggerEnter2D(Collider2D other) {
-        if (other.CompareTag("Wall_R")) { 
+        if(other.gameObject.CompareTag("Sidewall")){
+        if (other.gameObject.name =="Wall_R") { 
             //Ponto pro jogador esquerdo
-            Respawn(); // Reseta quando colide com a parede lateral
         }
-        if (other.CompareTag("Wall_L")) { 
+        if (other.gameObject.name =="Wall_L") { 
             //Ponto pro jogador direito
-            Respawn(); // Reseta quando colide com a parede lateral
+        }
+        Respawn(); // Reseta quando colide com a parede lateral
         }
     }
 }
