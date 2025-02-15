@@ -13,6 +13,6 @@ public class MoveRacket : MonoBehaviour
      void FixedUpdate()
     {
        float racketDirection = Input.GetAxisRaw(axis);
-       rb.linearVelocity = new Vector2(0, racketDirection);
+       rb.linearVelocity = new Vector2(0, racketDirection*speed);
     }
 }
