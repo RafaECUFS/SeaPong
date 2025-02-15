@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 49785306}
   m_Layer: 0
   m_Name: Wall_Top
-  m_TagString: Untagged
+  m_TagString: WallBounce
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -265,9 +265,10 @@ GameObject:
   - component: {fileID: 52801188}
   - component: {fileID: 52801187}
   - component: {fileID: 52801186}
+  - component: {fileID: 52801190}
   m_Layer: 0
   m_Name: RacketL
-  m_TagString: Untagged
+  m_TagString: Racket
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -284,7 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 981759cf9d8c15f4e9d0ddcc4593253a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
+  speed: 80
   axis: Vertical
 --- !u!50 &52801187
 Rigidbody2D:
@@ -383,6 +384,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &52801190
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 52801185}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.02, y: 0.04}
+    newSize: {x: 0.02, y: 0.04}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.02, y: 0.04}
+  m_EdgeRadius: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -533,7 +580,7 @@ GameObject:
   - component: {fileID: 613365710}
   m_Layer: 0
   m_Name: Wall_Bottom
-  m_TagString: Untagged
+  m_TagString: WallBounce
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -838,7 +885,7 @@ GameObject:
   - component: {fileID: 738811777}
   m_Layer: 0
   m_Name: Wall_L
-  m_TagString: Untagged
+  m_TagString: Sidewall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -970,9 +1017,10 @@ GameObject:
   - component: {fileID: 1071028414}
   - component: {fileID: 1071028413}
   - component: {fileID: 1071028412}
+  - component: {fileID: 1071028415}
   m_Layer: 0
   m_Name: Wall_R
-  m_TagString: Untagged
+  m_TagString: Sidewall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1093,6 +1141,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1071028415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1071028411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
 --- !u!1 &1077726273
 GameObject:
   m_ObjectHideFlags: 0
@@ -1125,7 +1186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 644eb1baaf0b73f49b3ee015c81a2b3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 10
   direction: {x: 0, y: 0}
 --- !u!50 &1077726275
 Rigidbody2D:
@@ -1264,7 +1325,7 @@ Transform:
   m_GameObject: {fileID: 1077726273}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.37187442, y: -1.4386973, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 25, y: 25, z: 25}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1282,9 +1343,10 @@ GameObject:
   - component: {fileID: 2126364199}
   - component: {fileID: 2126364198}
   - component: {fileID: 2126364197}
+  - component: {fileID: 2126364201}
   m_Layer: 0
   m_Name: RacketR
-  m_TagString: Untagged
+  m_TagString: Racket
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1301,7 +1363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 981759cf9d8c15f4e9d0ddcc4593253a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
+  speed: 80
   axis: Vertical2
 --- !u!50 &2126364198
 Rigidbody2D:
@@ -1400,6 +1462,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &2126364201
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2126364196}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.02, y: 0.04}
+    newSize: {x: 0.02, y: 0.04}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.02, y: 0.04}
+  m_EdgeRadius: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
