@@ -23,14 +23,41 @@ public class MoveBall : MonoBehaviour
     }
 
     Vector2 GetRandomDirection()
+{
+    // Define os ângulos mínimo e máximo em radianos
+    float minAngle = 30f * Mathf.Deg2Rad; // 30° em radianos
+    float maxAngle = 60f * Mathf.Deg2Rad; // 60° em radianos
+
+    // Escolhe aleatoriamente um dos quatro quadrantes
+    int quadrant = Random.Range(0, 4); // 0, 1, 2 ou 3
+
+    // Gera um ângulo aleatório dentro do intervalo desejado (30° a 60°)
+    float randomAngle = Random.Range(minAngle, maxAngle);
+
+    // Ajusta o ângulo com base no quadrante escolhido
+    switch (quadrant)
     {
-        // Gera um vetor de direção aleatória e normaliza
-        Vector2 randomDirection = new Vector2(
-            Random.Range(-1.5f, 1.5f),
-            Random.Range(-1.5f, 1.5f)
-        ).normalized;
-        return randomDirection;
+        case 0: // Primeiro quadrante (30° a 60°)
+            break; // Já está correto
+        case 1: // Segundo quadrante (120° a 150°)
+            randomAngle = 180f * Mathf.Deg2Rad - randomAngle;
+            break;
+        case 2: // Terceiro quadrante (210° a 240°)
+            randomAngle = 180f * Mathf.Deg2Rad + randomAngle;
+            break;
+        case 3: // Quarto quadrante (300° a 330°)
+            randomAngle = 360f * Mathf.Deg2Rad - randomAngle;
+            break;
     }
+
+    // Converte o ângulo para um vetor de direção
+    Vector2 randomDirection = new Vector2(
+        Mathf.Cos(randomAngle),
+        Mathf.Sin(randomAngle)
+    ).normalized;
+
+    return randomDirection;
+}
 
     void Respawn()
     {
@@ -69,6 +96,8 @@ public class MoveBall : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Sidewall"))
         {
+            Respawn(); // Reseta quando colide com a parede lateral
+
             if (other.gameObject.name == "Wall_R")
             {
                 //Implementar Ponto pro jogador esquerdo
@@ -79,7 +108,7 @@ public class MoveBall : MonoBehaviour
                 //Implementar Ponto pro jogador direito
                 Debug.Log("Ponto para o jogador direito!");
             }
-            Respawn(); // Reseta quando colide com a parede lateral
+            
         }
     }
 }
