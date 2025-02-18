@@ -2,73 +2,95 @@ using UnityEngine;
 
 public class MoveBall : MonoBehaviour
 {
-    public float speed = 30f;
-    public Vector2 direction;
-    private Rigidbody2D rb;
+    [SerializeField]
+    private float _speed = 30f; 
+    private Vector2 _direction;
+    private Rigidbody2D _rb;
+
+    public float Speed
+    {
+        get => _speed;
+        set
+        {
+            // Velocidade >= 0 sempre
+            _speed = Mathf.Max(0, value);
+        }
+    }
+
+    public Vector2 Direction
+    {
+        get => _direction;
+        private set => _direction = value;
+    }
+
+    private Rigidbody2D Rb
+    {
+        get => _rb;
+        set => _rb = value;
+    }
 
     void Update()
     {
         Collider2D col = GetComponent<Collider2D>();
         if (!col.enabled)
         {
-            col.enabled = true; // Reativa o trigger caso tenha sido desativado
+            col.enabled = true; // Reativa o trigger caso tenha sido desativado (Respawn não era chamado após colisão)
             Debug.Log("Collider da parede foi reativado!");
         }
     }
 
     void Awake()
     {
-        rb = GetComponent<Rigidbody2D>(); // Obtém o Rigidbody2D uma vez
-        rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous; // Garante boa detecção de colisão
+        Rb = GetComponent<Rigidbody2D>(); // Obtém o Rigidbody2D uma vez
+        Rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous; // Garante boa detecção de colisão (Houve bugs de colisão antes)
+        Rb.interpolation = RigidbodyInterpolation2D.Interpolate;
     }
 
     Vector2 GetRandomDirection()
-{
-    // Define os ângulos mínimo e máximo em radianos
-    float minAngle = 30f * Mathf.Deg2Rad; // 30° em radianos
-    float maxAngle = 60f * Mathf.Deg2Rad; // 60° em radianos
-
-    // Escolhe aleatoriamente um dos quatro quadrantes
-    int quadrant = Random.Range(0, 4); // 0, 1, 2 ou 3
-
-    // Gera um ângulo aleatório dentro do intervalo desejado (30° a 60°)
-    float randomAngle = Random.Range(minAngle, maxAngle);
-
-    // Ajusta o ângulo com base no quadrante escolhido
-    switch (quadrant)
     {
-        case 0: // Primeiro quadrante (30° a 60°)
-            break; // Já está correto
-        case 1: // Segundo quadrante (120° a 150°)
-            randomAngle = 180f * Mathf.Deg2Rad - randomAngle;
-            break;
-        case 2: // Terceiro quadrante (210° a 240°)
-            randomAngle = 180f * Mathf.Deg2Rad + randomAngle;
-            break;
-        case 3: // Quarto quadrante (300° a 330°)
-            randomAngle = 360f * Mathf.Deg2Rad - randomAngle;
-            break;
+        float minAngle = 30f * Mathf.Deg2Rad;
+        float maxAngle = 60f * Mathf.Deg2Rad;
+
+        // Escolhe aleatoriamente um dos quatro quadrantes e um ângulo do intervalo escolhido
+        int quadrant = Random.Range(0, 4);
+        float randomAngle = Random.Range(minAngle, maxAngle);
+
+        switch (quadrant)
+        {
+            case 0:
+                break;
+            case 1:
+                randomAngle = 180f * Mathf.Deg2Rad - randomAngle;
+                break;
+            case 2:
+                randomAngle = 180f * Mathf.Deg2Rad + randomAngle;
+                break;
+            case 3:
+                randomAngle = 360f * Mathf.Deg2Rad - randomAngle;
+                break;
+        }
+
+        // Converte o ângulo para um vetor de direção
+        Vector2 randomDirection = new Vector2(
+            Mathf.Cos(randomAngle),
+            Mathf.Sin(randomAngle)
+        ).normalized;
+
+        return randomDirection;
     }
 
-    // Converte o ângulo para um vetor de direção
-    Vector2 randomDirection = new Vector2(
-        Mathf.Cos(randomAngle),
-        Mathf.Sin(randomAngle)
-    ).normalized;
-
-    return randomDirection;
-}
-
-    void Respawn()
+    
+    void Respawn() // Reinicia o objeto
     {
-        rb.linearVelocity = Vector2.zero; //direction * speed;
+        Debug.Log("Respawn!");
+        Rb.linearVelocity = Vector2.zero; 
         float randomY = Random.Range(-1.5f, 1.5f);
 
-        rb.MovePosition(new Vector2(0, randomY));
-        direction = GetRandomDirection();
+        Rb.MovePosition(new Vector2(0, randomY));
+        Physics2D.SyncTransforms();
+        Direction = GetRandomDirection();
 
-        // Aplica a velocidade inicial
-        rb.linearVelocity = direction * speed;
+        Rb.linearVelocity = Direction * Speed; 
     }
 
     void Start()
@@ -76,23 +98,20 @@ public class MoveBall : MonoBehaviour
         Respawn();
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision) //Bola rebate das paredes horizontais
     {
         if (collision.gameObject.CompareTag("WallBounce"))
         {
-            // Inverte a direção no eixo Y
-            direction.y = -direction.y;
-            rb.linearVelocity = direction * speed;
+            Direction = new Vector2(Direction.x, -Direction.y);
+            Rb.linearVelocity = Direction * Speed; 
         }
         if (collision.gameObject.CompareTag("Racket"))
         {
-            //calcula onde bateu
-            // Inverte a direção no eixo X
-            direction.x = -direction.x;
+            Direction = new Vector2(-Direction.x, Direction.y); 
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other) //Trigger das paredes laterais ativdo
     {
         if (other.gameObject.CompareTag("Sidewall"))
         {
@@ -100,15 +119,12 @@ public class MoveBall : MonoBehaviour
 
             if (other.gameObject.name == "Wall_R")
             {
-                //Implementar Ponto pro jogador esquerdo
                 Debug.Log("Ponto para o jogador esquerdo!");
             }
             if (other.gameObject.name == "Wall_L")
             {
-                //Implementar Ponto pro jogador direito
                 Debug.Log("Ponto para o jogador direito!");
             }
-            
         }
     }
 }
