@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 55299d6540b060f4e81085cbc56f74a9
+guid: f1445e268578f2946aa0978ee0f6be41
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5433374106829458743
-    second: Racket_0
+      213: 3804840731800101778
+    second: "Divis\xF3ria do meio1_0"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Racket_0
+      name: "Divis\xF3ria do meio1_0"
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 2
-        height: 4
+        width: 16
+        height: 480
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9c2ff9e7907c894b0800000000000000
-      internalID: -5433374106829458743
+      spriteID: 293e1e59c728dc430800000000000000
+      internalID: 3804840731800101778
       vertices: []
       indices: 
       edges: []
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Racket_0: -5433374106829458743
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

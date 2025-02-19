@@ -121,12 +121,12 @@ public class MoveBall : MonoBehaviour
 
             if (other.gameObject.name == "Wall_R")
             {
-                GameObject.Find("Score_Blue").GetComponent<Scoreboard>().AddPoint();
+                GameObject.Find("Score_Red").GetComponent<Scoreboard>().AddPoint();
                 Debug.Log("Ponto para o jogador esquerdo!");
             }
             if (other.gameObject.name == "Wall_L")
             {
-                GameObject.Find("Score_Red").GetComponent<Scoreboard>().AddPoint();
+                GameObject.Find("Score_Blue").GetComponent<Scoreboard>().AddPoint();
                 Debug.Log("Ponto para o jogador direito!");
             }
         }
