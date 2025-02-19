@@ -6,6 +6,7 @@ public class MoveBall : MonoBehaviour
     private float _speed = 30f; 
     private Vector2 _direction;
     private Rigidbody2D _rb;
+    public Canvas canvas;
 
     public float Speed
     {
@@ -84,12 +85,13 @@ public class MoveBall : MonoBehaviour
     {
         Debug.Log("Respawn!");
         Rb.linearVelocity = Vector2.zero; 
-        float randomY = Random.Range(-1.5f, 1.5f);
 
-        Rb.MovePosition(new Vector2(0, randomY));
-        Physics2D.SyncTransforms();
+        RectTransform canvasRect = canvas.GetComponent<RectTransform>();//Centro do Canvas
+        transform.position = canvasRect.position;
+        float randomY = Random.Range(-0.5f, 0.5f);  
+        transform.position += new Vector3(0, randomY, 0);
+
         Direction = GetRandomDirection();
-
         Rb.linearVelocity = Direction * Speed; 
     }
 
@@ -119,10 +121,12 @@ public class MoveBall : MonoBehaviour
 
             if (other.gameObject.name == "Wall_R")
             {
+                GameObject.Find("Score_Blue").GetComponent<Scoreboard>().AddPoint();
                 Debug.Log("Ponto para o jogador esquerdo!");
             }
             if (other.gameObject.name == "Wall_L")
             {
+                GameObject.Find("Score_Red").GetComponent<Scoreboard>().AddPoint();
                 Debug.Log("Ponto para o jogador direito!");
             }
         }
