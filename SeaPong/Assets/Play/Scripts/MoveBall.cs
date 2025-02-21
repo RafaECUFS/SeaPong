@@ -3,15 +3,18 @@ using UnityEngine;
 public class MoveBall : MonoBehaviour
 {
     [SerializeField]
-    private float _speed = 30f; 
+    private float _speed = 20f; 
+    private float _speedInitial; 
     private Vector2 _direction;
     private Rigidbody2D _rb;
     public Canvas canvas;
     private ScoreTrack pointTracker;
-
+    private float fixedIncrease = 1.3f;
+    private bool speedIncrease = false;
     public float Speed
     {
         get => _speed;
+
         set
         {
             // Velocidade >= 0 sempre
@@ -85,7 +88,8 @@ public class MoveBall : MonoBehaviour
     public void Respawn()
 {
     Debug.Log("Respawn!");
-
+    speedIncrease = false;
+    
     // Ativa o Collider se estiver desativado
     Collider2D col = GetComponent<Collider2D>();
     if (!col.enabled)
@@ -104,12 +108,30 @@ public class MoveBall : MonoBehaviour
     transform.position += new Vector3(0, randomY, 0);
 
     Direction = GetRandomDirection();
+    Speed = _speedInitial;
     Rb.linearVelocity = Direction * Speed;
 }
 
 
+    private bool yBoundCollision(Collision2D collision)
+    {
+        Collider2D racket = collision.collider;
+    float racketHeight = racket.bounds.size.y;
+    float racketTop = racket.bounds.center.y + (racketHeight / 2);
+    float racketBottom = racket.bounds.center.y - (racketHeight / 2);
+
+    float collisionY = collision.contacts[0].point.y;
+
+    // Converte a posição do impacto em uma escala de 0 a 1 dentro da raquete
+    float normalizedY = Mathf.InverseLerp(racketBottom, racketTop, collisionY);
+
+    // Aumenta a velocidade se a colisão for nos 35% inferiores ou 35% superiores
+    return (normalizedY >= 0.65f || normalizedY <= 0.35f);
+    }
+
     public void Start()
     {
+        _speedInitial = _speed;
     pointTracker = FindObjectOfType<ScoreTrack>();
     if (pointTracker == null)
     {
@@ -123,12 +145,19 @@ public class MoveBall : MonoBehaviour
         if (collision.gameObject.CompareTag("WallBounce"))
         {
             Direction = new Vector2(Direction.x, -Direction.y);
-            Rb.linearVelocity = Direction * Speed; 
+            
         }
         if (collision.gameObject.CompareTag("Racket"))
+    {
+        Direction = new Vector2(-Direction.x, Direction.y);
+
+        if (!speedIncrease && yBoundCollision(collision))
         {
-            Direction = new Vector2(-Direction.x, Direction.y); 
+            speedIncrease = true;
+            Rb.linearVelocity *= fixedIncrease; // 🔹 Agora aplicamos o aumento direto aqui!
         }
+   
+    }
     }
 
     public void OnTriggerEnter2D(Collider2D other) //Trigger das paredes laterais ativdo
