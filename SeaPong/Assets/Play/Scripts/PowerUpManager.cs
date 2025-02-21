@@ -7,8 +7,8 @@ public class PowerUpManager : MonoBehaviour
     public RectTransform spawnArea; // Painel menor dentro do Canvas onde os power-ups devem spawnar
     public Canvas canvas; // Referência ao Canvas principal
 
-    public float chancePowerUp1 = 90f; 
-    public float chancePowerUp2 = 10f; 
+    public float chancePowerUp1 = 70f; 
+    public float chancePowerUp2 = 30f; 
     public float rngSpawn = 40f; 
 
     private void Start()
