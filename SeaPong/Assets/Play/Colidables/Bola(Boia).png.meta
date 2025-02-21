@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Bola(Boia)_0: 5286382353272055158
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
