@@ -7,6 +7,7 @@ public class MoveBall : MonoBehaviour
     private Vector2 _direction;
     private Rigidbody2D _rb;
     public Canvas canvas;
+    private ScoreTrack pointTracker;
 
     public float Speed
     {
@@ -30,7 +31,7 @@ public class MoveBall : MonoBehaviour
         set => _rb = value;
     }
 
-    void Update()
+    public void Update()
     {
         Collider2D col = GetComponent<Collider2D>();
         if (!col.enabled)
@@ -40,14 +41,14 @@ public class MoveBall : MonoBehaviour
         }
     }
 
-    void Awake()
+    public void Awake()
     {
         Rb = GetComponent<Rigidbody2D>(); // Obtém o Rigidbody2D uma vez
         Rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous; // Garante boa detecção de colisão (Houve bugs de colisão antes)
         Rb.interpolation = RigidbodyInterpolation2D.Interpolate;
     }
 
-    Vector2 GetRandomDirection()
+    public Vector2 GetRandomDirection()
     {
         float minAngle = 30f * Mathf.Deg2Rad;
         float maxAngle = 60f * Mathf.Deg2Rad;
@@ -81,26 +82,43 @@ public class MoveBall : MonoBehaviour
     }
 
     
-    void Respawn() // Reinicia o objeto
+    public void Respawn()
+{
+    Debug.Log("Respawn!");
+
+    // Ativa o Collider se estiver desativado
+    Collider2D col = GetComponent<Collider2D>();
+    if (!col.enabled)
     {
-        Debug.Log("Respawn!");
-        Rb.linearVelocity = Vector2.zero; 
-
-        RectTransform canvasRect = canvas.GetComponent<RectTransform>();//Centro do Canvas
-        transform.position = canvasRect.position;
-        float randomY = Random.Range(-0.5f, 0.5f);  
-        transform.position += new Vector3(0, randomY, 0);
-
-        Direction = GetRandomDirection();
-        Rb.linearVelocity = Direction * Speed; 
+        col.enabled = true;
+        Debug.Log("Collider da bola reativado!");
     }
 
-    void Start()
+    Rb.linearVelocity = Vector2.zero;
+
+    // Garante que a posição fique dentro dos limites do Canvas
+    RectTransform canvasRect = canvas.GetComponent<RectTransform>();
+    transform.position = new Vector3(canvasRect.position.x, canvasRect.position.y, 0);
+
+    float randomY = Random.Range(-0.5f, 0.5f);
+    transform.position += new Vector3(0, randomY, 0);
+
+    Direction = GetRandomDirection();
+    Rb.linearVelocity = Direction * Speed;
+}
+
+
+    public void Start()
     {
+    pointTracker = FindObjectOfType<ScoreTrack>();
+    if (pointTracker == null)
+    {
+        Debug.LogError("ScoreTrack não encontrado na cena.");
+    }
         Respawn();
     }
 
-    void OnCollisionEnter2D(Collision2D collision) //Bola rebate das paredes horizontais
+    public void OnCollisionEnter2D(Collision2D collision) //Bola rebate das paredes horizontais
     {
         if (collision.gameObject.CompareTag("WallBounce"))
         {
@@ -113,7 +131,7 @@ public class MoveBall : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other) //Trigger das paredes laterais ativdo
+    public void OnTriggerEnter2D(Collider2D other) //Trigger das paredes laterais ativdo
     {
         if (other.gameObject.CompareTag("Sidewall"))
         {
@@ -121,13 +139,21 @@ public class MoveBall : MonoBehaviour
 
             if (other.gameObject.name == "Wall_R")
             {
-                GameObject.Find("Score_Red").GetComponent<Scoreboard>().AddPoint();
-                Debug.Log("Ponto para o jogador esquerdo!");
+                if (pointTracker != null){
+                    pointTracker.RedScore.AddPoint();
+                    pointTracker.CheckWinCondition();
+                    }
+
+                
             }
             if (other.gameObject.name == "Wall_L")
             {
-                GameObject.Find("Score_Blue").GetComponent<Scoreboard>().AddPoint();
-                Debug.Log("Ponto para o jogador direito!");
+                if (pointTracker != null)
+                {
+                    pointTracker.BlueScore.AddPoint();
+                    pointTracker.CheckWinCondition();
+                    }
+                
             }
         }
     }

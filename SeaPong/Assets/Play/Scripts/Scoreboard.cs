@@ -20,13 +20,17 @@ public class Scoreboard : MonoBehaviour
         UpdateScoreboard();
     }
 
-    public void AddPoint() {
+    public void AddPoint() 
+    {
         if (Score < scoreImages.Length - 1) { // Evita erro ao ultrapassar o máximo
             Score++;
             UpdateScoreboard();
         }
     }
-    void UpdateScoreboard() {
+    public void ResetPoints(){Score -= Score;}
+    
+    void UpdateScoreboard() 
+    {
         scoreDisplay.sprite = scoreImages[Score]; // Troca a imagem do placar
     }
 }
