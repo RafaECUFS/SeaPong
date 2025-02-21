@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class MoveBall : MonoBehaviour
 {
+    public delegate void BallRespawned();
+    public static event BallRespawned OnBallRespawned;
+
     [SerializeField]
     private float _speed = 20f; 
     private float _speedInitial; 
@@ -11,6 +14,12 @@ public class MoveBall : MonoBehaviour
     private ScoreTrack pointTracker;
     private float fixedIncrease = 1.3f;
     private bool speedIncrease = false;
+    private string nameCollide;
+    public string NameCollide
+    {
+        get { return nameCollide; }
+        set { nameCollide = value; }
+    }
     public float Speed
     {
         get => _speed;
@@ -89,6 +98,8 @@ public class MoveBall : MonoBehaviour
 {
     Debug.Log("Respawn!");
     speedIncrease = false;
+
+    OnBallRespawned?.Invoke();
     
     // Ativa o Collider se estiver desativado
     Collider2D col = GetComponent<Collider2D>();
@@ -149,6 +160,7 @@ public class MoveBall : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Racket"))
     {
+        NameCollide = collision.gameObject.name;
         Direction = new Vector2(-Direction.x, Direction.y);
 
         if (!speedIncrease && yBoundCollision(collision))
