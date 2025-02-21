@@ -30,9 +30,16 @@ public class WASDLuck : MonoBehaviour
     public void PowerUp(Scoreboard collided, Scoreboard opponent)
     {
         if (collided.Score < opponent.Score)
-            opponent.Score -= 2;
+        {
+            opponent.LosePoints(2);
+            Debug.Log("Nova pontuação oponente: " + opponent.Score);
+        }
         else
-            collided.Score += 2;
+        {
+            collided.BonusPoints(2);
+            Debug.Log("Nova pontuação jogador: " + collided.Score);
+        }
+            
 
         gameObject.SetActive(false); // Em vez de destruir, apenas desativa o power-up
     }

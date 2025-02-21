@@ -19,7 +19,26 @@ public class Scoreboard : MonoBehaviour
         scoreDisplay = GetComponent<Image>();
         UpdateScoreboard();
     }
+    public void BonusPoints(int addedPoints)
+    {
+       if (Score < scoreImages.Length - 2) 
+       { 
+            Score += addedPoints;
+            UpdateScoreboard();
+       }
+       else
+            AddPoint();
+    }
 
+    public void LosePoints(int lostPoints)
+    {
+        if(Score>1)
+            Score -= lostPoints;
+        else
+            Score--;
+
+        UpdateScoreboard();
+    }
     public void AddPoint() 
     {
         if (Score < scoreImages.Length - 1) { // Evita erro ao ultrapassar o máximo
