@@ -43,15 +43,52 @@ public class MoveBall : MonoBehaviour
         set => _rb = value;
     }
 
-    public void Update()
+public void FixedUpdate()
+{
+    
+    // Limita a velocidade para evitar atravessamento
+    float maxSpeed = 30f; 
+    if (Rb.linearVelocity.magnitude > maxSpeed)
     {
-        Collider2D col = GetComponent<Collider2D>();
-        if (!col.enabled)
-        {
-            col.enabled = true; // Reativa o trigger caso tenha sido desativado (Respawn não era chamado após colisão)
-            Debug.Log("Collider da parede foi reativado!");
-        }
+        Rb.linearVelocity = Rb.linearVelocity.normalized * maxSpeed;
     }
+
+    // Garante que o collider esteja ativo
+    Collider2D col = GetComponent<Collider2D>();
+    if (!col.enabled)
+    {
+        col.enabled = true;
+        Debug.Log("Collider da bola foi reativado!");
+    }
+
+    // **FORÇA RESPAWN SE A BOLA ESCAPAR e perde pontos**
+    if (IsOutOfBounds() || Rb.linearVelocity.magnitude==0 || (Mathf.Abs(Rb.linearVelocity.x) < 0.1f))
+    {
+        Debug.LogWarning(" Bola saiu dos limites! Respawnando...");
+        pointTracker.BlueScore.LosePoints(1);
+        pointTracker.RedScore.LosePoints(1);
+        Respawn();
+    }
+}
+
+
+    private bool IsOutOfBounds()
+{
+    RectTransform canvasRect = canvas.GetComponent<RectTransform>();
+    Vector3[] canvasCorners = new Vector3[4];
+    canvasRect.GetWorldCorners(canvasCorners); // Obtém os cantos do Canvas no mundo
+
+    float minX = canvasCorners[0].x; // Canto inferior esquerdo
+    float maxX = canvasCorners[2].x; // Canto superior direito
+    float minY = canvasCorners[0].y;
+    float maxY = canvasCorners[2].y;
+
+    // Posição da bola no mundo
+    Vector3 ballPos = transform.position;
+
+    // Se a bola sair dos limites, retorna true
+    return (ballPos.x < minX || ballPos.x > maxX || ballPos.y < minY || ballPos.y > maxY);
+}
 
     public void Awake()
     {
@@ -100,7 +137,7 @@ public class MoveBall : MonoBehaviour
     speedIncrease = false;
 
     OnBallRespawned?.Invoke();
-    
+
     // Ativa o Collider se estiver desativado
     Collider2D col = GetComponent<Collider2D>();
     if (!col.enabled)
