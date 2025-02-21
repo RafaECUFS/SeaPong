@@ -34,7 +34,7 @@ public class Scoreboard : MonoBehaviour
     {
         if(Score>1)
             Score -= lostPoints;
-        else
+        else if (Score>0)
             Score--;
 
         UpdateScoreboard();
