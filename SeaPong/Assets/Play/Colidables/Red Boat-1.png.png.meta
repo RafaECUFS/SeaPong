@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Red Boat-1.png_0: 6404369113239306412
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

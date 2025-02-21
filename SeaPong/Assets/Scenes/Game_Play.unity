@@ -486,14 +486,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -8762064702240156224, guid: d5aa6f713ecbaf141bb392b4dfd58fb5, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1748,7 +1748,7 @@ Transform:
   m_GameObject: {fileID: 904784929}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1013.0012, y: 170.6008, z: -9719.998}
+  m_LocalPosition: {x: 1029, y: 160, z: -9719.998}
   m_LocalScale: {x: 431.99994, y: 431.99994, z: 431.99994}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1811,7 +1811,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.2, y: 0.2}
+    oldSize: {x: 0.75, y: 0.75}
     newSize: {x: 0.01, y: 0.01}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1863,8 +1863,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 8185563065791875171, guid: 9ee94bc6e4ecde4479a088f1caf38b42, type: 3}
+  m_Color: {r: 1, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1883,8 +1883,8 @@ Transform:
   m_GameObject: {fileID: 942788273}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1006.00073, y: -0.03938293, z: -9719.998}
-  m_LocalScale: {x: 431.99994, y: 431.99994, z: 431.99994}
+  m_LocalPosition: {x: 1024, y: -51, z: -9719.998}
+  m_LocalScale: {x: 80, y: 80, z: 80}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1023964528}
@@ -2337,7 +2337,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 6, y: -176.3}
+  m_AnchoredPosition: {x: 6, y: -108}
   m_SizeDelta: {x: 220, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1190178186
@@ -2456,8 +2456,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1, y: -96}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 1, y: -0.0012989}
+  m_SizeDelta: {x: 200, y: 141.08}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1232896272
 MonoBehaviour:
@@ -2673,7 +2673,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1, y: -170.00075}
+  m_AnchoredPosition: {x: 1, y: -101.69985}
   m_SizeDelta: {x: 220, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1413371980
@@ -3051,7 +3051,7 @@ MonoBehaviour:
   canvas: {fileID: 1502313894}
   chancePowerUp1: 75
   chancePowerUp2: 25
-  rngSpawn: 40
+  rngSpawn: 30
 --- !u!4 &1735332899
 Transform:
   m_ObjectHideFlags: 0
