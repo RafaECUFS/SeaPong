@@ -443,7 +443,6 @@ GameObject:
   - component: {fileID: 132955473}
   - component: {fileID: 132955475}
   - component: {fileID: 132955474}
-  - component: {fileID: 132955476}
   m_Layer: 5
   m_Name: victoryPanel
   m_TagString: Untagged
@@ -513,19 +512,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 132955472}
   m_CullTransparentMesh: 1
---- !u!114 &132955476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 132955472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 486a11588dffdbe47b88df5e92303b2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  painel: {fileID: 132955473}
 --- !u!1 &150436569
 GameObject:
   m_ObjectHideFlags: 0
@@ -1541,8 +1527,8 @@ GameObject:
   m_Component:
   - component: {fileID: 764260558}
   - component: {fileID: 764260557}
-  - component: {fileID: 764260556}
   - component: {fileID: 764260559}
+  - component: {fileID: 764260560}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1550,19 +1536,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &764260556
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 764260555}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 486a11588dffdbe47b88df5e92303b2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  painel: {fileID: 132955473}
 --- !u!114 &764260557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1577,8 +1550,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RedScore: {fileID: 568127805}
   BlueScore: {fileID: 773968098}
-  winTrophy: {fileID: 764260556}
-  pauseManager: {fileID: 764260559}
+  panelManager: {fileID: 764260560}
 --- !u!4 &764260558
 Transform:
   m_ObjectHideFlags: 0
@@ -1608,6 +1580,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pausePanel: {fileID: 843662498}
   pauseText: {fileID: 1912777153}
+  panelManager: {fileID: 764260560}
+--- !u!114 &764260560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 764260555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 486a11588dffdbe47b88df5e92303b2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  painel: {fileID: 132955473}
   victoryPanel: {fileID: 132955472}
   MenuButton: {fileID: 1413371978}
   victoryText: {fileID: 1232896272}
@@ -1728,7 +1714,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &843662499
 RectTransform:
   m_ObjectHideFlags: 0
