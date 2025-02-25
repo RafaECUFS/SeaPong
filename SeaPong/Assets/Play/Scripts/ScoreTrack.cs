@@ -4,8 +4,7 @@ public class ScoreTrack : MonoBehaviour //Gerencia pontuações
 {
     public Scoreboard RedScore;
     public Scoreboard BlueScore;
-    public PainelController winTrophy;
-    public Pause pauseManager; // Referência ao sistema de pausa
+    public PainelController panelManager;
     private bool isWinner;
     public bool IsWinner
     {
@@ -18,7 +17,7 @@ public class ScoreTrack : MonoBehaviour //Gerencia pontuações
         GameObject trophy = GameObject.Find("victoryPanel");
         if (trophy != null)
         {
-            winTrophy = trophy.GetComponent<PainelController>();
+            panelManager = trophy.GetComponent<PainelController>();
         }
 
         GameObject scoreRedObject = GameObject.Find("Score_Red");
@@ -40,14 +39,14 @@ public class ScoreTrack : MonoBehaviour //Gerencia pontuações
         if (RedScore.Score >= 10)
         {
             IsWinner = true;
-            winTrophy.MoverPainel(IsWinner);
-            pauseManager.EndGame("Jogador Vermelho venceu!");
+            panelManager.MoverPainel(IsWinner);
+            panelManager.EndGame("Jogador Vermelho venceu!");
         }
         else if (BlueScore.Score >= 10)
         {
             IsWinner = false;
-            winTrophy.MoverPainel(IsWinner);
-            pauseManager.EndGame("Jogador Azul venceu!");
+            panelManager.MoverPainel(IsWinner);
+            panelManager.EndGame("Jogador Azul venceu!");
         }
     }
 }

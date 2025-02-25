@@ -31,12 +31,6 @@ public class IamSpeed : MonoBehaviour
         gameObject.SetActive(false); // Em vez de destruir, apenas desativa o power-up
     }
 
-    /*private IEnumerator ResetSpeedAfterDelay(MoveRacket boat, float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        boat.ResetSpeed();
-    }*/
-
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (ball == null)
