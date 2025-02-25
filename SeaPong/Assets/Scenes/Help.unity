@@ -255,7 +255,7 @@ Transform:
   m_GameObject: {fileID: 296181853}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -110, y: 29, z: -9719.999}
+  m_LocalPosition: {x: -110, y: 40.2, z: -9719.999}
   m_LocalScale: {x: 150, y: 150, z: 150}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -598,8 +598,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 702, y: -191}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 718.65, y: -191}
+  m_SizeDelta: {x: 179, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &869422226
 MonoBehaviour:
@@ -722,8 +722,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 707.46, y: 50.47}
-  m_SizeDelta: {x: -1640.15, y: -704.7}
+  m_AnchoredPosition: {x: 721.54, y: 50.47}
+  m_SizeDelta: {x: -1612, y: -704.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1085946297
 MonoBehaviour:
@@ -899,7 +899,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Cuidado! as pontas do navio podem furar a boia e uma nova custa pontos
+  m_text: 'Cuidado! as pontas do navio podem furar a boia e uma nova CUSTA pontos
     pros dois navios!
 
 '
@@ -1396,8 +1396,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.7550812, y: -0.01727295}
-  m_SizeDelta: {x: 213.49, y: 44.39}
+  m_AnchoredPosition: {x: 0.8046, y: 0.04}
+  m_SizeDelta: {x: 231.4561, y: 44.39}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1827824010
 MonoBehaviour:
@@ -1419,7 +1419,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'I AM SPEED:
+  m_text: 'lIGHTNING MARKINHOS:
 
     Barco ganha velocidade
 
@@ -1538,8 +1538,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 706, y: -186.70047}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 720.78, y: -186.70047}
+  m_SizeDelta: {x: 176.89, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1865166691
 MonoBehaviour:
@@ -1610,7 +1610,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.43529412, g: 0.3529412, b: 0.17254902, a: 0.8352941}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1669,8 +1669,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 700, y: 45}
-  m_SizeDelta: {x: -1640.15, y: -704.7}
+  m_AnchoredPosition: {x: 718.94, y: 44.43}
+  m_SizeDelta: {x: -1606.77, y: -703.57}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1912675934
 MonoBehaviour:
@@ -1744,7 +1744,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 26.999907, y: 33.612286}
+  m_AnchoredPosition: {x: 26.999907, y: 53.3}
   m_SizeDelta: {x: 213.49, y: 44.39}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2032203652
@@ -1767,12 +1767,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'i have 2 reais:
-
-    Equilibre o placar um pouco
-
-
-'
+  m_text: "TWO REAIS OR...:\n 2 PONTOS OU UM \"PRESENTE\" MISTERIOSO PRO OPONENTE?\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
@@ -1877,7 +1872,7 @@ Transform:
   m_GameObject: {fileID: 2146891678}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -110, y: 134, z: -9719.999}
+  m_LocalPosition: {x: -110, y: 135, z: -9719.999}
   m_LocalScale: {x: 181.43999, y: 191.16, z: 108}
   m_ConstrainProportionsScale: 0
   m_Children:

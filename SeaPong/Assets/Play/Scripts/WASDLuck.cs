@@ -9,22 +9,8 @@ public class WASDLuck : MonoBehaviour
     void Start()
     {
         ball = FindObjectOfType<MoveBall>();
-        if (ball == null)
-        {
-            Debug.LogError("MoveBall não encontrado na cena.");
-        }
-
         pointTracker = FindObjectOfType<ScoreTrack>();
-        if (pointTracker == null)
-        {
-            Debug.LogError("ScoreTrack não encontrado na cena.");
-        }
-
         powerUpManager = FindObjectOfType<PowerUpManager>();
-        if (powerUpManager == null)
-        {
-            Debug.LogError("PowerUpManager não encontrado na cena.");
-        }
     }
 
     public void PowerUp(Scoreboard collided, Scoreboard opponent)
@@ -32,12 +18,10 @@ public class WASDLuck : MonoBehaviour
         if (collided.Score < opponent.Score)
         {
             opponent.LosePoints(2);
-            Debug.Log("Nova pontuação oponente: " + opponent.Score);
         }
         else
         {
             collided.BonusPoints(2);
-            Debug.Log("Nova pontuação jogador: " + collided.Score);
         }
             
 
@@ -48,7 +32,6 @@ public class WASDLuck : MonoBehaviour
     {
         if (ball == null)
         {
-            Debug.LogError("Ball não encontrado!");
             return;
         }
 

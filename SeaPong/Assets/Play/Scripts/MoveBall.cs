@@ -6,10 +6,10 @@ public class MoveBall : MonoBehaviour
     public static event BallRespawned OnBallRespawned;
 
     [SerializeField]
-    private float _speed = 20f; 
-    private float _speedInitial; 
+    private float _speed = 10f;
+    private float _speedInitial;
     private Vector2 _direction;
-    private Rigidbody2D _rb;
+    private Rigidbody2D RigidBody;
     public Canvas canvas;
     private ScoreTrack pointTracker;
     private float fixedIncrease = 1.3f;
@@ -23,7 +23,6 @@ public class MoveBall : MonoBehaviour
     public float Speed
     {
         get => _speed;
-
         set
         {
             // Velocidade >= 0 sempre
@@ -37,70 +36,70 @@ public class MoveBall : MonoBehaviour
         private set => _direction = value;
     }
 
-    private Rigidbody2D Rb
+    private Rigidbody2D ballRigidBody
     {
-        get => _rb;
-        set => _rb = value;
+        get => RigidBody;
+        set => RigidBody = value;
     }
 
-public void FixedUpdate()
-{
-    
-    // Limita a velocidade para evitar atravessamento
-    float maxSpeed = 30f; 
-    if (Rb.linearVelocity.magnitude > maxSpeed)
+    public void FixedUpdate()
     {
-        Rb.linearVelocity = Rb.linearVelocity.normalized * maxSpeed;
+        // Limita a velocidade para evitar atravessamento
+        float maxSpeed = 30f;
+        if (ballRigidBody.linearVelocity.magnitude > maxSpeed)
+        {
+            ballRigidBody.linearVelocity = ballRigidBody.linearVelocity.normalized * maxSpeed;
+        }
+
+        // Garante que o collider esteja ativo
+        Collider2D ballCollider = GetComponent<Collider2D>();
+        if (!ballCollider.enabled)
+        {
+            ballCollider.enabled = true;
+        }
+
+        // **FORÇA RESPAWN SE A BOLA ESCAPAR e perde pontos**
+        if (
+            IsOutOfBounds()
+            || ballRigidBody.linearVelocity.magnitude == 0
+            || (Mathf.Abs(ballRigidBody.linearVelocity.x) < 0.1f)
+        )
+        {
+            pointTracker.BlueScore.LosePoints(1);
+            pointTracker.RedScore.LosePoints(1);
+            Respawn();
+        }
     }
 
-    // Garante que o collider esteja ativo
-    Collider2D col = GetComponent<Collider2D>();
-    if (!col.enabled)
+    private bool IsOutOfBounds() //verifica erro de escapar dos limites
     {
-        col.enabled = true;
-        Debug.Log("Collider da bola foi reativado!");
+        RectTransform canvasRect = canvas.GetComponent<RectTransform>();
+        Vector3[] canvasCorners = new Vector3[4];
+        canvasRect.GetWorldCorners(canvasCorners); // Obtém os cantos do Canvas no mundo
+
+        float minX = canvasCorners[0].x; // Canto inferior esquerdo
+        float maxX = canvasCorners[2].x; // Canto superior direito
+        float minY = canvasCorners[0].y;
+        float maxY = canvasCorners[2].y;
+
+        // Posição da bola no mundo
+        Vector3 ballPos = transform.position;
+
+        // Se a bola sair dos limites, retorna true
+        return (ballPos.x < minX || ballPos.x > maxX || ballPos.y < minY || ballPos.y > maxY);
     }
-
-    // **FORÇA RESPAWN SE A BOLA ESCAPAR e perde pontos**
-    if (IsOutOfBounds() || Rb.linearVelocity.magnitude==0 || (Mathf.Abs(Rb.linearVelocity.x) < 0.1f))
-    {
-        Debug.LogWarning(" Bola saiu dos limites! Respawnando...");
-        pointTracker.BlueScore.LosePoints(1);
-        pointTracker.RedScore.LosePoints(1);
-        Respawn();
-    }
-}
-
-
-    private bool IsOutOfBounds()
-{
-    RectTransform canvasRect = canvas.GetComponent<RectTransform>();
-    Vector3[] canvasCorners = new Vector3[4];
-    canvasRect.GetWorldCorners(canvasCorners); // Obtém os cantos do Canvas no mundo
-
-    float minX = canvasCorners[0].x; // Canto inferior esquerdo
-    float maxX = canvasCorners[2].x; // Canto superior direito
-    float minY = canvasCorners[0].y;
-    float maxY = canvasCorners[2].y;
-
-    // Posição da bola no mundo
-    Vector3 ballPos = transform.position;
-
-    // Se a bola sair dos limites, retorna true
-    return (ballPos.x < minX || ballPos.x > maxX || ballPos.y < minY || ballPos.y > maxY);
-}
 
     public void Awake()
     {
-        Rb = GetComponent<Rigidbody2D>(); // Obtém o Rigidbody2D uma vez
-        Rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous; // Garante boa detecção de colisão (Houve bugs de colisão antes)
-        Rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+        ballRigidBody = GetComponent<Rigidbody2D>(); // Obtém o Rigidbody2D uma vez
+        ballRigidBody.collisionDetectionMode = CollisionDetectionMode2D.Continuous; // Garante boa detecção de colisão (Houve bugs de colisão antes)
+        ballRigidBody.interpolation = RigidbodyInterpolation2D.Interpolate;
     }
 
     public Vector2 GetRandomDirection()
     {
-        float minAngle = 30f * Mathf.Deg2Rad;
-        float maxAngle = 60f * Mathf.Deg2Rad;
+        float minAngle = 20f * Mathf.Deg2Rad;
+        float maxAngle = 75f * Mathf.Deg2Rad;
 
         // Escolhe aleatoriamente um dos quatro quadrantes e um ângulo do intervalo escolhido
         int quadrant = Random.Range(0, 4);
@@ -130,61 +129,53 @@ public void FixedUpdate()
         return randomDirection;
     }
 
-    
     public void Respawn()
-{
-    Debug.Log("Respawn!");
-    speedIncrease = false;
-
-    OnBallRespawned?.Invoke();
-
-    // Ativa o Collider se estiver desativado
-    Collider2D col = GetComponent<Collider2D>();
-    if (!col.enabled)
     {
-        col.enabled = true;
-        Debug.Log("Collider da bola reativado!");
+        speedIncrease = false;
+
+        OnBallRespawned?.Invoke();
+
+        // Ativa o Collider se estiver desativado
+        Collider2D ballCollider = GetComponent<Collider2D>();
+        if (!ballCollider.enabled)
+        {
+            ballCollider.enabled = true;
+        }
+
+        ballRigidBody.linearVelocity = Vector2.zero;
+
+        // Garante que a posição fique dentro dos limites do Canvas
+        RectTransform canvasRect = canvas.GetComponent<RectTransform>();
+        transform.position = new Vector3(canvasRect.position.x, canvasRect.position.y, 0);
+
+        float randomY = Random.Range(-0.5f, 0.5f);
+        transform.position += new Vector3(0, randomY, 0);
+
+        Direction = GetRandomDirection();
+        Speed = _speedInitial;
+        ballRigidBody.linearVelocity = Direction * Speed;
     }
-
-    Rb.linearVelocity = Vector2.zero;
-
-    // Garante que a posição fique dentro dos limites do Canvas
-    RectTransform canvasRect = canvas.GetComponent<RectTransform>();
-    transform.position = new Vector3(canvasRect.position.x, canvasRect.position.y, 0);
-
-    float randomY = Random.Range(-0.5f, 0.5f);
-    transform.position += new Vector3(0, randomY, 0);
-
-    Direction = GetRandomDirection();
-    Speed = _speedInitial;
-    Rb.linearVelocity = Direction * Speed;
-}
-
 
     private bool yBoundCollision(Collision2D collision)
     {
         Collider2D racket = collision.collider;
-    float racketHeight = racket.bounds.size.y;
-    float racketTop = racket.bounds.center.y + (racketHeight / 2);
-    float racketBottom = racket.bounds.center.y - (racketHeight / 2);
+        float racketHeight = racket.bounds.size.y;
+        float racketTop = racket.bounds.center.y + (racketHeight / 2);
+        float racketBottom = racket.bounds.center.y - (racketHeight / 2);
 
-    float collisionY = collision.contacts[0].point.y;
+        float collisionY = collision.contacts[0].point.y;
 
-    // Converte a posição do impacto em uma escala de 0 a 1 dentro da raquete
-    float normalizedY = Mathf.InverseLerp(racketBottom, racketTop, collisionY);
+        // Converte a posição do impacto em uma escala de 0 a 1 dentro da raquete
+        float normalizedY = Mathf.InverseLerp(racketBottom, racketTop, collisionY);
 
-    // Aumenta a velocidade se a colisão for nos 35% inferiores ou 35% superiores
-    return (normalizedY >= 0.65f || normalizedY <= 0.35f);
+        // Aumenta a velocidade se a colisão for nos 35% inferiores ou 35% superiores
+        return (normalizedY >= 0.65f || normalizedY <= 0.35f);
     }
 
     public void Start()
     {
         _speedInitial = _speed;
-    pointTracker = FindObjectOfType<ScoreTrack>();
-    if (pointTracker == null)
-    {
-        Debug.LogError("ScoreTrack não encontrado na cena.");
-    }
+        pointTracker = FindObjectOfType<ScoreTrack>();
         Respawn();
     }
 
@@ -193,20 +184,18 @@ public void FixedUpdate()
         if (collision.gameObject.CompareTag("WallBounce"))
         {
             Direction = new Vector2(Direction.x, -Direction.y);
-            
         }
         if (collision.gameObject.CompareTag("Racket"))
-    {
-        NameCollide = collision.gameObject.name;
-        Direction = new Vector2(-Direction.x, Direction.y);
-
-        if (!speedIncrease && yBoundCollision(collision))
         {
-            speedIncrease = true;
-            Rb.linearVelocity *= fixedIncrease; // 🔹 Agora aplicamos o aumento direto aqui!
+            NameCollide = collision.gameObject.name;
+            Direction = new Vector2(-Direction.x, Direction.y);
+
+            if (!speedIncrease && yBoundCollision(collision))
+            {
+                speedIncrease = true;
+                ballRigidBody.linearVelocity *= fixedIncrease; // 🔹 Agora aplicamos o aumento direto aqui!
+            }
         }
-   
-    }
     }
 
     public void OnTriggerEnter2D(Collider2D other) //Trigger das paredes laterais ativdo
@@ -217,12 +206,11 @@ public void FixedUpdate()
 
             if (other.gameObject.name == "Wall_R")
             {
-                if (pointTracker != null){
+                if (pointTracker != null)
+                {
                     pointTracker.RedScore.AddPoint();
                     pointTracker.CheckWinCondition();
-                    }
-
-                
+                }
             }
             if (other.gameObject.name == "Wall_L")
             {
@@ -230,8 +218,7 @@ public void FixedUpdate()
                 {
                     pointTracker.BlueScore.AddPoint();
                     pointTracker.CheckWinCondition();
-                    }
-                
+                }
             }
         }
     }

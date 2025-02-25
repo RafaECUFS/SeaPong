@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BlueBoat-1.png_0: 5435099080810080179
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
