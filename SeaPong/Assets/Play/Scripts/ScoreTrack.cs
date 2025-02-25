@@ -14,10 +14,10 @@ public class ScoreTrack : MonoBehaviour //Gerencia pontuações
 
     public void Start()
     {
-        GameObject trophy = GameObject.Find("victoryPanel");
+        GameObject winController = GameObject.Find("victoryPanel");
         if (trophy != null)
         {
-            panelManager = trophy.GetComponent<PainelController>();
+            panelManager = winController.GetComponent<PainelController>();
         }
 
         GameObject scoreRedObject = GameObject.Find("Score_Red");
@@ -34,7 +34,7 @@ public class ScoreTrack : MonoBehaviour //Gerencia pontuações
         }
     }
 
-    public void CheckWinCondition()
+    public void CheckWinCondition() //Checa se alguém alcançou 10 pontos
     {
         if (RedScore.Score >= 10)
         {
