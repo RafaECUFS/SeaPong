@@ -228,7 +228,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7515989757528555961, guid: a125262775340744abcb319774df04fb, type: 3}
-  m_Color: {r: 0.27450982, g: 0.27450982, b: 0.27450982, a: 1}
+  m_Color: {r: 0.27450982, g: 0.27450982, b: 0.27450982, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -285,9 +285,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 981759cf9d8c15f4e9d0ddcc4593253a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 30
-  speedInitial: 20
-  fixedIncrease: 1.3
+  speed: 11
+  speedInitial: 11
+  fixedIncrease: 1.5
   axis: Vertical
 --- !u!50 &52801187
 Rigidbody2D:
@@ -381,8 +381,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 414, y: 199, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 0.2666667}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 4, y: 3.6, z: 0.2}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -674,7 +674,7 @@ GameObject:
   - component: {fileID: 182758816}
   - component: {fileID: 182758815}
   m_Layer: 0
-  m_Name: spritesheet(1)_0
+  m_Name: Sea_animated
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -767,8 +767,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1.10083, y: -4.686767, z: -9719.999}
-  m_LocalScale: {x: 291.13556, y: 224.70479, z: 108}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 300, y: 231.54657, z: 111.28837}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1502313895}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1188,7 +1188,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7515989757528555961, guid: a125262775340744abcb319774df04fb, type: 3}
-  m_Color: {r: 0.27450982, g: 0.27450982, b: 0.27450982, a: 1}
+  m_Color: {r: 0.27450982, g: 0.27450982, b: 0.27450982, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1378,7 +1378,7 @@ Transform:
   m_GameObject: {fileID: 689860304}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 422, y: 199, z: 0}
+  m_LocalPosition: {x: 422, y: 198.89, z: 0}
   m_LocalScale: {x: 2.2, y: 2.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1494,7 +1494,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -1538790010208267781, guid: 8c3fbc2f70553454b9d87181906db0ed, type: 3}
-  m_Color: {r: 0.3137255, g: 0.3137255, b: 0.3137255, a: 1}
+  m_Color: {r: 0.3137255, g: 0.3137255, b: 0.3137255, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1932,7 +1932,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1029, y: 160, z: -9719.998}
-  m_LocalScale: {x: 431.99994, y: 431.99994, z: 431.99994}
+  m_LocalScale: {x: 450.00003, y: 450.00003, z: 450.00003}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1023964528}
@@ -2067,7 +2067,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1040, y: -73, z: -9719.998}
-  m_LocalScale: {x: 325, y: 325, z: 325}
+  m_LocalScale: {x: 340.00003, y: 340.00003, z: 340.00003}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1023964528}
@@ -2271,7 +2271,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -1538790010208267781, guid: 8c3fbc2f70553454b9d87181906db0ed, type: 3}
-  m_Color: {r: 0.27450982, g: 0.27450982, b: 0.27450982, a: 1}
+  m_Color: {r: 0.27450982, g: 0.27450982, b: 0.27450982, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2340,7 +2340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 644eb1baaf0b73f49b3ee015c81a2b3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 10
+  _speed: 13.5
   canvas: {fileID: 1502313894}
 --- !u!50 &1077726275
 Rigidbody2D:
@@ -3061,7 +3061,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.36078432, g: 0.29803923, b: 0.32941177, a: 0.99215686}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3684,9 +3684,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 981759cf9d8c15f4e9d0ddcc4593253a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 30
-  speedInitial: 20
-  fixedIncrease: 1.3
+  speed: 11
+  speedInitial: 11
+  fixedIncrease: 1.5
   axis: Vertical2
 --- !u!50 &2126364198
 Rigidbody2D:
@@ -3780,7 +3780,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 430, y: 199, z: 0}
-  m_LocalScale: {x: 2.9999998, y: 4, z: 0.19999996}
+  m_LocalScale: {x: 4, y: 3.6, z: 0.19999996}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

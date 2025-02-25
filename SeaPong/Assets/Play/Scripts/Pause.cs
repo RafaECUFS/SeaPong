@@ -1,6 +1,6 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class Pause : MonoBehaviour
 {
@@ -10,13 +10,18 @@ public class Pause : MonoBehaviour
     public GameObject MenuButton;
     public TMP_Text victoryText;
     private bool isPaused = false;
-    public bool IsPaused{get=>isPaused; private set{isPaused=value;} }
-    void TogglePause()//Alterna o pause
+    public bool IsPaused
     {
-        IsPaused = !IsPaused; 
-        pausePanel.SetActive(IsPaused); 
+        get => isPaused;
+        private set { isPaused = value; }
+    }
+
+    void TogglePause() //Alterna o pause
+    {
+        IsPaused = !IsPaused;
+        pausePanel.SetActive(IsPaused);
         pauseText.SetActive(IsPaused);
-        
+
         Time.timeScale = IsPaused ? 0 : 1;
     }
 
@@ -26,7 +31,7 @@ public class Pause : MonoBehaviour
         Time.timeScale = 0; // Garante que o jogo pare
         victoryPanel.SetActive(isPaused);
         MenuButton.SetActive(isPaused);
-        if (victoryText!=null)
+        if (victoryText != null)
             victoryText.text = message;
     }
 
