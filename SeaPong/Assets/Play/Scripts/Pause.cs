@@ -25,7 +25,7 @@ public class Pause : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !panelManager.GameWon) // Verifica se a tecla ESPAÇO foi pressionada
+        if (Input.GetKeyDown(KeyCode.Space) && !panelManager.GameWon) // Verifica se a tecla ESPAÇO foi pressionada E se o jogo já foi ganho
         {
             TogglePause();
         }
